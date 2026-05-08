@@ -38,12 +38,15 @@ Learn MySQL is a local-first SQL practice app with:
 
 ```text
 learnMySQL/
+  FRONTEND.md             # step-by-step frontend setup
   src/                    # frontend app
     api/                  # frontend API clients
     components/           # UI components
     styles/               # modular CSS
     assets/               # README screenshots
   server/
+    README.md             # step-by-step backend + MySQL setup
+    .env.example          # copy to server/.env
     src/
       index.ts            # Express API + schema/query routes
       queryGuard.ts       # SQL safety rules
@@ -52,22 +55,34 @@ learnMySQL/
 
 ---
 
-## Setup
+## Setup (start here if you are new)
 
-### 1) Prerequisites
+Step-by-step onboarding is split by area so you do not have to guess prerequisites or order of operations.
 
-- Node.js 20+
-- npm 10+
-- MySQL running locally
+| Guide | What it covers |
+|--------|----------------|
+| **[FRONTEND.md](./FRONTEND.md)** | Installing Node/npm, `npm install`, optional root `.env`, running Vite or the full-stack `npm run dev`, build/preview, troubleshooting. |
+| **[server/README.md](./server/README.md)** | Cloning the repo, installing **MySQL Server**, creating or importing databases (`SHOW DATABASES`), `server/.env` from `server/.env.example`, running the API (`npm run dev` inside `server/`), health check, common connection errors. |
 
-### 2) Install dependencies
+**Full stack in one command** (after backend env + MySQL are ready): from the repo root run `npm run dev` — MySQL auto-start helper on Windows, Express on port `4000`, Vite on port `5173`.
+
+---
+
+## Quick start (experienced developers)
+
+### Prerequisites
+
+- Node.js 20+, npm 10+
+- MySQL running locally and a database your user can read
+
+### Install dependencies
 
 ```bash
 npm install
 npm --prefix ./server install
 ```
 
-### 3) Configure environment
+### Configure environment
 
 Copy examples and edit values:
 
@@ -78,10 +93,10 @@ cp server/.env.example server/.env
 
 Important:
 
-- frontend `.env`: usually keep `VITE_API_BASE_URL` unset in dev (Vite proxy handles `/api`)
-- backend `server/.env`: set `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
+- Frontend `.env`: in dev, usually keep `VITE_API_BASE_URL` unset (Vite proxies `/api`; see `vite.config.ts`).
+- Backend `server/.env`: set `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` — see **[server/README.md](./server/README.md)**.
 
-### 4) Run app
+### Run app
 
 ```bash
 npm run dev
@@ -90,7 +105,9 @@ npm run dev
 This starts both:
 
 - API server (default `http://localhost:4000`)
-- frontend dev server (default `http://localhost:5173`)
+- Frontend dev server (default `http://localhost:5173`)
+
+For more detail, use the guides above.
 
 ---
 
@@ -164,10 +181,11 @@ This starts both:
 
 ## Troubleshooting
 
-- If API is unreachable, verify `server/.env` credentials and MySQL status.
-- If frontend cannot hit API in dev, confirm Vite proxy target and backend `PORT`.
+- If API is unreachable, verify `server/.env` credentials and MySQL status (**[server/README.md](./server/README.md)**).
+- If frontend cannot hit API in dev, confirm Vite proxy target and backend `PORT` (**[FRONTEND.md](./FRONTEND.md)**).
 - If relationships look stale, refresh after changing selected database.
 - If MySQL permission errors appear, ensure your DB user can `SHOW` schema metadata.
+- If `npm run dev` fails on Windows with “concurrently” errors, run `npm install` at the repo root (**[FRONTEND.md](./FRONTEND.md)**, “Common problems”).
 
 ---
 
