@@ -1,0 +1,160 @@
+.relation-diagram {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem;
+  background: color-mix(in srgb, var(--bg) 90%, var(--code-bg));
+  overflow: auto;
+  max-height: min(56vh, calc(100dvh - 16rem));
+}
+
+.relation-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.relation-lines path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--accent) 76%, var(--border));
+  stroke-width: 1.4;
+  opacity: 0.95;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.relation-handle {
+  fill: color-mix(in srgb, var(--accent) 70%, #ffffff);
+  stroke: color-mix(in srgb, var(--accent) 86%, #2a0d3b);
+  stroke-width: 1;
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.relation-handle:active {
+  cursor: grabbing;
+}
+
+.relation-table-grid {
+  position: relative;
+  z-index: 2;
+  min-width: fit-content;
+  min-height: 100%;
+}
+
+.relation-table-card {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  min-width: 11.5rem;
+  background: color-mix(in srgb, var(--bg) 84%, var(--code-bg));
+  color: var(--text-h);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  user-select: none;
+}
+
+.relation-table-card.dragging {
+  z-index: 3;
+}
+
+.relation-table-card.focused {
+  z-index: 4;
+}
+
+.relation-table-card.dragging.focused {
+  z-index: 5;
+}
+
+.relation-table-card h3 {
+  margin: 0;
+  padding: 0.3rem 0.4rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.78rem;
+  font-family: var(--heading);
+}
+
+.relation-table-handle {
+  cursor: grab;
+}
+
+.relation-table-card.dragging .relation-table-handle,
+.relation-table-handle:active {
+  cursor: grabbing;
+}
+
+.relation-table-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.1rem 0.14rem;
+  display: grid;
+  gap: 0.02rem;
+}
+
+.relation-table-card li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.12rem;
+  padding: 0.05rem 0.08rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--bg) 93%, transparent);
+}
+
+.relation-col-name-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.relation-table-card li code {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--text-h);
+  display: inline-block;
+  max-width: 7.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relation-col-type {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text);
+  text-align: right;
+  white-space: nowrap;
+  max-width: 7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.relation-pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.56rem;
+  line-height: 1;
+  padding: 0.04rem 0.2rem;
+  font-weight: 700;
+}
+
+.relation-pill.pk {
+  border-color: color-mix(in srgb, #2962ff 48%, var(--border));
+  background: color-mix(in srgb, #2962ff 16%, transparent);
+}
+
+.relation-pill.fk {
+  border-color: color-mix(in srgb, #7b1fa2 45%, var(--border));
+  background: color-mix(in srgb, #7b1fa2 16%, transparent);
+}
+
+.relation-table-card li.relation-empty {
+  grid-template-columns: minmax(0, 1fr);
+  color: var(--text);
+}
