@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run start:mysql && concurrently -k -n api,web -c yellow,cyan \"npm --prefix ./server run dev\" \"vite\"",
+    "dev": "npm run start:mysql && npx concurrently -k -n api,web -c yellow,cyan \"npm --prefix ./server run dev\" \"vite\"",
     "start:mysql": "node ./scripts/start-mysql.cjs",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
